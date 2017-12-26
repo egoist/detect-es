@@ -7,6 +7,10 @@
 
 ⚠️ **Work In Progress.*
 
+## Use cases
+
+Prevent from shipping unexpected ES6 code to your users, and more...
+
 ## What's supported?
 
 ### Features
