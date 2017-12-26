@@ -1,0 +1,52 @@
+{
+  "name": "detect-es",
+  "version": "0.0.0",
+  "description": "Detect ES6 features in your code.",
+  "repository": {
+    "url": "egoist/detect-es",
+    "type": "git"
+  },
+  "bin": "dist/cli.js",
+  "main": "dist/index.js",
+  "files": ["dist"],
+  "scripts": {
+    "test": "npm run lint && echo 'no tests!'",
+    "lint": "xo",
+    "build": "bili src/{cli,index}.js --format cjs --filename [name].js",
+    "watch": "yarn build --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "egoist <0x142857@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/traverse": "^7.0.0-beta.36",
+    "babylon": "^7.0.0-beta.36",
+    "cac": "^4.2.4",
+    "fs-extra": "^5.0.0",
+    "globby": "^7.1.1"
+  },
+  "devDependencies": {
+    "babel-jest": "^22.0.4",
+    "babel-preset-env": "^1.6.1",
+    "bili": "^1.3.0",
+    "eslint-config-rem": "^3.0.0",
+    "jest": "^22.0.4",
+    "xo": "^0.18.0"
+  },
+  "xo": {
+    "extends": "rem",
+    "envs": ["jest"]
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  }
+}
