@@ -50,14 +50,13 @@ detect-es foo.js
 ## API
 
 ```js
-const detect = require('detect-es')
+const { parse }  = require('detect-es')
 
-detect('const foo = {...bar}').then(file => {
-  console.log(file.has('const'))
-  // true
-  console.log(file.has('object_rest_spread'))
-  // true
-})
+const stats = parse('const foo = {...bar}')
+console.log(stats.has('const'))
+// true
+console.log(stats.has('object_rest_spread'))
+// true
 ```
 
 ## Contributing
