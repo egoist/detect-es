@@ -20,7 +20,7 @@ Prevent from shipping unexpected ES6 code to your users, and more...
 - [x] `template literal`
 - [x] `tagged template literal`
 - [x] `class`
-- [ ] `arrow function`
+- [x] `arrow function`
 - [ ] `async/await`
 - [ ] `es modules`
 - [ ] `dynamic import`

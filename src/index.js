@@ -62,6 +62,9 @@ export function detect(code) {
     },
     ClassDeclaration(path) {
       detective.add({ type: types.CLASS, loc: path.node.loc })
+    },
+    ArrowFunctionExpression(path) {
+      detective.add({ type: types.ARROW_FUNCTION, loc: path.node.loc })
     }
   })
   return detective

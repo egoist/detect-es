@@ -19,3 +19,8 @@ test('class', () => {
   const detective = detect(`class Foo {}`)
   expect(detective.has(types.CLASS)).toBe(true)
 })
+
+test('arrow function', () => {
+  const detective = detect(`const a = () => {}`)
+  expect(detective.has(types.ARROW_FUNCTION)).toBe(true)
+})
