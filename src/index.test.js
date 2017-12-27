@@ -1,73 +1,73 @@
-import { detect, types } from './'
+import { parse, types } from './'
 
 test('const', () => {
-  const detective = detect(`const a = 1`)
+  const detective = parse(`const a = 1`)
   expect(detective.has(types.CONST)).toBe(true)
 })
 
 test('let', () => {
-  const detective = detect(`let a = 1`)
+  const detective = parse(`let a = 1`)
   expect(detective.has(types.LET)).toBe(true)
 })
 
 test('tagged template literal', () => {
-  const detective = detect(`let a = foo\`ha\``)
+  const detective = parse(`let a = foo\`ha\``)
   expect(detective.has(types.TAGGED_TEMPLATE_LITERAL)).toBe(true)
 })
 
 test('class', () => {
-  const detective = detect(`class Foo {}`)
+  const detective = parse(`class Foo {}`)
   expect(detective.has(types.CLASS)).toBe(true)
 })
 
 test('arrow function', () => {
-  const detective = detect(`const a = () => {}`)
+  const detective = parse(`const a = () => {}`)
   expect(detective.has(types.ARROW_FUNCTION)).toBe(true)
 })
 
 test('async/await', () => {
-  expect(detect(`async function foo() {}`).has(types.ASYNC)).toBe(true)
-  expect(detect(`const foo = async () => {}`).has(types.ASYNC)).toBe(true)
-  expect(detect(`const foo = {async bar() {}}`).has(types.ASYNC)).toBe(true)
+  expect(parse(`async function foo() {}`).has(types.ASYNC)).toBe(true)
+  expect(parse(`const foo = async () => {}`).has(types.ASYNC)).toBe(true)
+  expect(parse(`const foo = {async bar() {}}`).has(types.ASYNC)).toBe(true)
 })
 
 test('es module', () => {
-  expect(detect(`import foo from 'foo'`).has(types.ES_MODULE)).toBe(true)
-  expect(detect(`import {foo} from 'foo'`).has(types.ES_MODULE)).toBe(true)
-  expect(detect(`export default {}`).has(types.ES_MODULE)).toBe(true)
-  expect(detect(`export {foo}`).has(types.ES_MODULE)).toBe(true)
-  expect(detect(`export const foo = {}`).has(types.ES_MODULE)).toBe(true)
+  expect(parse(`import foo from 'foo'`).has(types.ES_MODULE)).toBe(true)
+  expect(parse(`import {foo} from 'foo'`).has(types.ES_MODULE)).toBe(true)
+  expect(parse(`export default {}`).has(types.ES_MODULE)).toBe(true)
+  expect(parse(`export {foo}`).has(types.ES_MODULE)).toBe(true)
+  expect(parse(`export const foo = {}`).has(types.ES_MODULE)).toBe(true)
 })
 
 test('dynamic import', () => {
-  expect(detect(`import('foo')`).has(types.DYNAMIC_IMPORT)).toBe(true)
-  expect(detect(`foo.import('foo')`).has(types.DYNAMIC_IMPORT)).toBe(false)
+  expect(parse(`import('foo')`).has(types.DYNAMIC_IMPORT)).toBe(true)
+  expect(parse(`foo.import('foo')`).has(types.DYNAMIC_IMPORT)).toBe(false)
 })
 
 test('destructuring', () => {
-  expect(detect(`let {a} = {a:1}`).has(types.DESTRUCTURING)).toBe(true)
-  expect(detect(`let [a] = [1]`).has(types.DESTRUCTURING)).toBe(true)
-  expect(detect(`function foo({a}) {}`).has(types.DESTRUCTURING)).toBe(true)
+  expect(parse(`let {a} = {a:1}`).has(types.DESTRUCTURING)).toBe(true)
+  expect(parse(`let [a] = [1]`).has(types.DESTRUCTURING)).toBe(true)
+  expect(parse(`function foo({a}) {}`).has(types.DESTRUCTURING)).toBe(true)
 })
 
 test('generator', () => {
-  expect(detect(`function * foo() {}`).has(types.GENERATOR)).toBe(true)
-  expect(detect(`const foo = {*bar() {}}`).has(types.GENERATOR)).toBe(true)
+  expect(parse(`function * foo() {}`).has(types.GENERATOR)).toBe(true)
+  expect(parse(`const foo = {*bar() {}}`).has(types.GENERATOR)).toBe(true)
 })
 
 test('for..of', () => {
-  expect(detect(`for (const a of b) {}`).has(types.FOR_OF)).toBe(true)
+  expect(parse(`for (const a of b) {}`).has(types.FOR_OF)).toBe(true)
 })
 
 test('Object.assign', () => {
-  expect(detect(`Object.assign()`).hasAPI('Object.assign')).toBe(true)
+  expect(parse(`Object.assign()`).hasAPI('Object.assign')).toBe(true)
 })
 
 test('API', () => {
-  expect(detect(`new Promise()`).hasAPI('Promise')).toBe(true)
-  expect(detect(`new Proxy()`).hasAPI('Proxy')).toBe(true)
-  expect(detect(`new Map()`).hasAPI('Map')).toBe(true)
-  expect(detect(`new WeakMap()`).hasAPI('WeakMap')).toBe(true)
-  expect(detect(`new Set()`).hasAPI('Set')).toBe(true)
-  expect(detect(`new WeakSet()`).hasAPI('WeakSet')).toBe(true)
+  expect(parse(`new Promise()`).hasAPI('Promise')).toBe(true)
+  expect(parse(`new Proxy()`).hasAPI('Proxy')).toBe(true)
+  expect(parse(`new Map()`).hasAPI('Map')).toBe(true)
+  expect(parse(`new WeakMap()`).hasAPI('WeakMap')).toBe(true)
+  expect(parse(`new Set()`).hasAPI('Set')).toBe(true)
+  expect(parse(`new WeakSet()`).hasAPI('WeakSet')).toBe(true)
 })

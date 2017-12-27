@@ -8,7 +8,9 @@
   },
   "bin": "dist/cli.js",
   "main": "dist/index.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "npm run lint && jest",
     "lint": "xo",
@@ -22,6 +24,7 @@
     "@babel/traverse": "^7.0.0-beta.36",
     "babylon": "^7.0.0-beta.36",
     "cac": "^4.2.4",
+    "chalk": "^2.3.0",
     "fs-extra": "^5.0.0",
     "globby": "^7.1.1"
   },
@@ -35,7 +38,9 @@
   },
   "xo": {
     "extends": "rem",
-    "envs": ["jest"]
+    "envs": [
+      "jest"
+    ]
   },
   "babel": {
     "presets": [
