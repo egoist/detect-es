@@ -60,5 +60,5 @@ test('for..of', () => {
 })
 
 test('Object.assign', () => {
-  expect(detect(`Object.assign()`).has(types.OBJECT_ASSIGN)).toBe(true)
+  expect(detect(`Object.assign()`).has(types.API)).toBe(true)
 })

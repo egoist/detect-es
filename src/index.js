@@ -25,6 +25,12 @@ class Detective {
     ))
   }
 
+  hasAPI(value) {
+    return Boolean(this.items.find(item =>
+      item.type === 'API' && item.value === value
+    ))
+  }
+
   add(item) {
     this.items.push(item)
     return this
@@ -112,7 +118,7 @@ export function detect(code) {
     },
     MemberExpression(path) {
       if (path.node.object.name === 'Object' && path.node.property.name === 'assign') {
-        detective.add({ type: types.OBJECT_ASSIGN, loc: path.node.loc })
+        detective.add({ type: types.API, value: 'Object.assign', loc: path.node.loc })
       }
     }
   })
