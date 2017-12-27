@@ -54,3 +54,7 @@ test('generator', () => {
   expect(detect(`function * foo() {}`).has(types.GENERATOR)).toBe(true)
   expect(detect(`const foo = {*bar() {}}`).has(types.GENERATOR)).toBe(true)
 })
+
+test('for..of', () => {
+  expect(detect(`for (const a of b) {}`).has(types.FOR_OF)).toBe(true)
+})

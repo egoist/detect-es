@@ -106,6 +106,9 @@ export function detect(code) {
       } else if (path.node.generator) {
         detective.add({ type: types.GENERATOR, loc: path.node.loc })
       }
+    },
+    ForOfStatement(path) {
+      detective.add({ type: types.FOR_OF, loc: path.node.loc })
     }
   })
   return detective

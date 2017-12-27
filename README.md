@@ -26,7 +26,7 @@ Prevent from shipping unexpected ES6 code to your users, and more...
 - [x] `dynamic import`
 - [x] `destructuring`
 - [x] `generator`
-- [ ] `for..of`
+- [x] `for..of`
 - [ ] PR to add more...
 
 ### APIs
