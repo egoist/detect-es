@@ -30,3 +30,10 @@ test('async/await', () => {
   expect(detect(`const foo = async () => {}`).has(types.ASYNC)).toBe(true)
 })
 
+test('es module', () => {
+  expect(detect(`import foo from 'foo'`).has(types.ES_MODULE)).toBe(true)
+  expect(detect(`import {foo} from 'foo'`).has(types.ES_MODULE)).toBe(true)
+  expect(detect(`export default {}`).has(types.ES_MODULE)).toBe(true)
+  expect(detect(`export {foo}`).has(types.ES_MODULE)).toBe(true)
+  expect(detect(`export const foo = {}`).has(types.ES_MODULE)).toBe(true)
+})

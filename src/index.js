@@ -73,6 +73,15 @@ export function detect(code) {
       if (path.node.async) {
         detective.add({ type: types.ASYNC, loc: path.node.loc })
       }
+    },
+    ImportDeclaration(path) {
+      detective.add({ type: types.ES_MODULE, loc: path.node.loc })
+    },
+    ExportNamedDeclaration(path) {
+      detective.add({ type: types.ES_MODULE, loc: path.node.loc })
+    },
+    ExportDefaultDeclaration(path) {
+      detective.add({ type: types.ES_MODULE, loc: path.node.loc })
     }
   })
   return detective
