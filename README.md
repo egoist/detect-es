@@ -21,7 +21,7 @@ Prevent from shipping unexpected ES6 code to your users, and more...
 - [x] `tagged template literal`
 - [x] `class`
 - [x] `arrow function`
-- [ ] `async/await`
+- [x] `async/await`
 - [ ] `es modules`
 - [ ] `dynamic import`
 - [ ] `destructuring`

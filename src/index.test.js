@@ -24,3 +24,9 @@ test('arrow function', () => {
   const detective = detect(`const a = () => {}`)
   expect(detective.has(types.ARROW_FUNCTION)).toBe(true)
 })
+
+test('async/await', () => {
+  expect(detect(`async function foo() {}`).has(types.ASYNC)).toBe(true)
+  expect(detect(`const foo = async () => {}`).has(types.ASYNC)).toBe(true)
+})
+

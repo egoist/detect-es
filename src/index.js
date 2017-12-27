@@ -65,6 +65,14 @@ export function detect(code) {
     },
     ArrowFunctionExpression(path) {
       detective.add({ type: types.ARROW_FUNCTION, loc: path.node.loc })
+      if (path.node.async) {
+        detective.add({ type: types.ASYNC, loc: path.node.loc })
+      }
+    },
+    FunctionDeclaration(path) {
+      if (path.node.async) {
+        detective.add({ type: types.ASYNC, loc: path.node.loc })
+      }
     }
   })
   return detective
