@@ -76,6 +76,8 @@ export function detect(code) {
     FunctionDeclaration(path) {
       if (path.node.async) {
         detective.add({ type: types.ASYNC, loc: path.node.loc })
+      } else if (path.node.generator) {
+        detective.add({ type: types.GENERATOR, loc: path.node.loc })
       }
     },
     ImportDeclaration(path) {
@@ -97,6 +99,13 @@ export function detect(code) {
     },
     ArrayPattern(path) {
       detective.add({ type: types.DESTRUCTURING, loc: path.node.loc })
+    },
+    ObjectMethod(path) {
+      if (path.node.async) {
+        detective.add({ type: types.ASYNC, loc: path.node.loc })
+      } else if (path.node.generator) {
+        detective.add({ type: types.GENERATOR, loc: path.node.loc })
+      }
     }
   })
   return detective

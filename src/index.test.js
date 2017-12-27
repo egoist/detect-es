@@ -28,6 +28,7 @@ test('arrow function', () => {
 test('async/await', () => {
   expect(detect(`async function foo() {}`).has(types.ASYNC)).toBe(true)
   expect(detect(`const foo = async () => {}`).has(types.ASYNC)).toBe(true)
+  expect(detect(`const foo = {async bar() {}}`).has(types.ASYNC)).toBe(true)
 })
 
 test('es module', () => {
@@ -47,4 +48,9 @@ test('destructuring', () => {
   expect(detect(`let {a} = {a:1}`).has(types.DESTRUCTURING)).toBe(true)
   expect(detect(`let [a] = [1]`).has(types.DESTRUCTURING)).toBe(true)
   expect(detect(`function foo({a}) {}`).has(types.DESTRUCTURING)).toBe(true)
+})
+
+test('generator', () => {
+  expect(detect(`function * foo() {}`).has(types.GENERATOR)).toBe(true)
+  expect(detect(`const foo = {*bar() {}}`).has(types.GENERATOR)).toBe(true)
 })
