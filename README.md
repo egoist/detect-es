@@ -5,7 +5,7 @@
 
 > Detect ESnext features in your code.
 
-⚠️ **Work In Progress.*
+⚠️  *Work In Progress.*
 
 ## Use cases
 
@@ -54,7 +54,7 @@ detect-es foo.js
 ```js
 const detect = require('detect-es')
 
-detect('foo.js').then(file => {
+detect('const foo = {...bar}').then(file => {
   console.log(file.has('const'))
   // true
   console.log(file.has('object_rest_spread'))
