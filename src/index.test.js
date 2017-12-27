@@ -37,3 +37,8 @@ test('es module', () => {
   expect(detect(`export {foo}`).has(types.ES_MODULE)).toBe(true)
   expect(detect(`export const foo = {}`).has(types.ES_MODULE)).toBe(true)
 })
+
+test('dynamic import', () => {
+  expect(detect(`import('foo')`).has(types.DYNAMIC_IMPORT)).toBe(true)
+  expect(detect(`foo.import('foo')`).has(types.DYNAMIC_IMPORT)).toBe(false)
+})

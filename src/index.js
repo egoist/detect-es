@@ -41,7 +41,11 @@ export function detect(code) {
   const detective = new Detective()
   const ast = babylon.parse(code, {
     sourceType: 'module',
-    plugins: ['*']
+    plugins: [
+      'dynamicImport',
+      'objectRestSpread',
+      'flow'
+    ]
   })
   traverse(ast, {
     VariableDeclaration(path) {
@@ -82,6 +86,11 @@ export function detect(code) {
     },
     ExportDefaultDeclaration(path) {
       detective.add({ type: types.ES_MODULE, loc: path.node.loc })
+    },
+    CallExpression(path) {
+      if (path.get('callee').type === 'Import') {
+        detective.add({ type: types.DYNAMIC_IMPORT, loc: path.node.loc })
+      }
     }
   })
   return detective

@@ -23,7 +23,7 @@ Prevent from shipping unexpected ES6 code to your users, and more...
 - [x] `arrow function`
 - [x] `async/await`
 - [x] `es module`
-- [ ] `dynamic import`
+- [x] `dynamic import`
 - [ ] `destructuring`
 - [ ] `generator`
 - [ ] `for..of`
