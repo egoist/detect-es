@@ -59,6 +59,9 @@ export function detect(code) {
     },
     TaggedTemplateExpression(path) {
       detective.add({ type: types.TAGGED_TEMPLATE_LITERAL, loc: path.node.loc })
+    },
+    ClassDeclaration(path) {
+      detective.add({ type: types.CLASS, loc: path.node.loc })
     }
   })
   return detective
