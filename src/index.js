@@ -91,6 +91,12 @@ export function detect(code) {
       if (path.get('callee').type === 'Import') {
         detective.add({ type: types.DYNAMIC_IMPORT, loc: path.node.loc })
       }
+    },
+    ObjectPattern(path) {
+      detective.add({ type: types.DESTRUCTURING, loc: path.node.loc })
+    },
+    ArrayPattern(path) {
+      detective.add({ type: types.DESTRUCTURING, loc: path.node.loc })
     }
   })
   return detective

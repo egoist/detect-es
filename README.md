@@ -24,7 +24,7 @@ Prevent from shipping unexpected ES6 code to your users, and more...
 - [x] `async/await`
 - [x] `es module`
 - [x] `dynamic import`
-- [ ] `destructuring`
+- [x] `destructuring`
 - [ ] `generator`
 - [ ] `for..of`
 - [ ] PR to add more...
