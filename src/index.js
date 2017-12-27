@@ -114,6 +114,7 @@ export function parse(code) {
         })
       }
     },
+    // TODO: this is obviously not accurate..
     Identifier(path) {
       const nodeNames = ['Promise', 'Proxy', 'Map', 'Set', 'WeakMap', 'WeakSet']
       if (nodeNames.includes(path.node.name)) {
