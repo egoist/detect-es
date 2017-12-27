@@ -3,7 +3,7 @@ import fs from 'fs-extra'
 import cac from 'cac'
 import globby from 'globby'
 import chalk from 'chalk'
-import detect from '.'
+import { parse } from '.'
 
 const cli = cac()
 
@@ -25,7 +25,7 @@ cli.command('*', 'Detect from input files', async (input, flags) => {
     files.map(file =>
       fs
         .readFile(file, 'utf8')
-        .then(content => ({ stats: detect.parse(content).stats, file }))
+        .then(content => ({ stats: parse(content).stats, file }))
     )
   )
   for (const fileStat of fileStats) {
