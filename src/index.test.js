@@ -58,3 +58,7 @@ test('generator', () => {
 test('for..of', () => {
   expect(detect(`for (const a of b) {}`).has(types.FOR_OF)).toBe(true)
 })
+
+test('Object.assign', () => {
+  expect(detect(`Object.assign()`).has(types.OBJECT_ASSIGN)).toBe(true)
+})

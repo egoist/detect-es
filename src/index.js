@@ -109,6 +109,11 @@ export function detect(code) {
     },
     ForOfStatement(path) {
       detective.add({ type: types.FOR_OF, loc: path.node.loc })
+    },
+    MemberExpression(path) {
+      if (path.node.object.name === 'Object' && path.node.property.name === 'assign') {
+        detective.add({ type: types.OBJECT_ASSIGN, loc: path.node.loc })
+      }
     }
   })
   return detective
