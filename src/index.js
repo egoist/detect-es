@@ -47,6 +47,8 @@ export function detect(code) {
     VariableDeclaration(path) {
       if (path.node.kind === 'const') {
         detective.add({ type: types.CONST, loc: path.node.loc })
+      } else if (path.node.kind === 'let') {
+        detective.add({ type: types.LET, loc: path.node.loc })
       }
     },
     TemplateLiteral(path) {

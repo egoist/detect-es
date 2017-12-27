@@ -10,7 +10,7 @@
   "main": "dist/index.js",
   "files": ["dist"],
   "scripts": {
-    "test": "npm run lint && echo 'no tests!'",
+    "test": "npm run lint && jest",
     "lint": "xo",
     "build": "bili src/{cli,index}.js --format cjs --filename [name].js",
     "watch": "yarn build --watch",

@@ -16,7 +16,7 @@ Prevent from shipping unexpected ES6 code to your users, and more...
 ### Features
 
 - [x] `const`
-- [ ] `let`
+- [x] `let`
 - [x] `template literal`
 - [ ] `tagged template literal`
 - [ ] `class`
