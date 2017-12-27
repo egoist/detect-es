@@ -60,5 +60,14 @@ test('for..of', () => {
 })
 
 test('Object.assign', () => {
-  expect(detect(`Object.assign()`).has(types.API)).toBe(true)
+  expect(detect(`Object.assign()`).hasAPI('Object.assign')).toBe(true)
+})
+
+test('API', () => {
+  expect(detect(`new Promise()`).hasAPI('Promise')).toBe(true)
+  expect(detect(`new Proxy()`).hasAPI('Proxy')).toBe(true)
+  expect(detect(`new Map()`).hasAPI('Map')).toBe(true)
+  expect(detect(`new WeakMap()`).hasAPI('WeakMap')).toBe(true)
+  expect(detect(`new Set()`).hasAPI('Set')).toBe(true)
+  expect(detect(`new WeakSet()`).hasAPI('WeakSet')).toBe(true)
 })

@@ -6,11 +6,13 @@ import * as types from './types'
 
 export default async input => {
   const files = await globby(input)
-  const res = await Promise.all(files.map(async file => {
-    const code = await fs.readFile(file, 'utf8')
-    const stats = detect(code)
-    return { file, stats }
-  }))
+  const res = await Promise.all(
+    files.map(async file => {
+      const code = await fs.readFile(file, 'utf8')
+      const stats = detect(code)
+      return { file, stats }
+    })
+  )
   console.log(res)
 }
 
@@ -20,15 +22,17 @@ class Detective {
   }
 
   has(type) {
-    return Boolean(this.items.find(item =>
-      item.type === type || item.type.toLowerCase() === type
-    ))
+    return Boolean(
+      this.items.find(
+        item => item.type === type || item.type.toLowerCase() === type
+      )
+    )
   }
 
   hasAPI(value) {
-    return Boolean(this.items.find(item =>
-      item.type === 'API' && item.value === value
-    ))
+    return Boolean(
+      this.items.find(item => item.type === 'API' && item.value === value)
+    )
   }
 
   add(item) {
@@ -37,8 +41,8 @@ class Detective {
   }
 
   count(type) {
-    return this.items.filter(item =>
-      item.type === type || item.type.toLowerCase() === type
+    return this.items.filter(
+      item => item.type === type || item.type.toLowerCase() === type
     ).length
   }
 }
@@ -47,11 +51,7 @@ export function detect(code) {
   const detective = new Detective()
   const ast = babylon.parse(code, {
     sourceType: 'module',
-    plugins: [
-      'dynamicImport',
-      'objectRestSpread',
-      'flow'
-    ]
+    plugins: ['dynamicImport', 'objectRestSpread', 'flow']
   })
   traverse(ast, {
     VariableDeclaration(path) {
@@ -117,8 +117,25 @@ export function detect(code) {
       detective.add({ type: types.FOR_OF, loc: path.node.loc })
     },
     MemberExpression(path) {
-      if (path.node.object.name === 'Object' && path.node.property.name === 'assign') {
-        detective.add({ type: types.API, value: 'Object.assign', loc: path.node.loc })
+      if (
+        path.node.object.name === 'Object' &&
+        path.node.property.name === 'assign'
+      ) {
+        detective.add({
+          type: types.API,
+          value: 'Object.assign',
+          loc: path.node.loc
+        })
+      }
+    },
+    Identifier(path) {
+      const nodeNames = ['Promise', 'Proxy', 'Map', 'Set', 'WeakMap', 'WeakSet']
+      if (nodeNames.includes(path.node.name)) {
+        detective.add({
+          type: types.API,
+          value: path.node.name,
+          loc: path.node.loc
+        })
       }
     }
   })

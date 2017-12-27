@@ -32,9 +32,9 @@ Prevent from shipping unexpected ES6 code to your users, and more...
 ### APIs
 
 - [x] `Object.assign`
-- [ ] `Map` `Set` `WeakMap` `WeakSet`
-- [ ] `Promise`
-- [ ] `Proxy`
+- [x] `Map` `Set` `WeakMap` `WeakSet`
+- [x] `Promise`
+- [x] `Proxy`
 - [ ] PR to add more...
 
 ## Install
