@@ -18,7 +18,7 @@ Prevent from shipping unexpected ES6 code to your users, and more...
 - [x] `const`
 - [x] `let`
 - [x] `template literal`
-- [ ] `tagged template literal`
+- [x] `tagged template literal`
 - [ ] `class`
 - [ ] `arrow function`
 - [ ] `async/await`

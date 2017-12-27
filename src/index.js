@@ -56,6 +56,9 @@ export function detect(code) {
     },
     SpreadElement(path) {
       detective.add({ type: types.OBJECT_REST_SPREAD, loc: path.node.loc })
+    },
+    TaggedTemplateExpression(path) {
+      detective.add({ type: types.TAGGED_TEMPLATE_LITERAL, loc: path.node.loc })
     }
   })
   return detective
