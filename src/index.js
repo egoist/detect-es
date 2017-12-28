@@ -1,5 +1,6 @@
 import * as babylon from 'babylon'
 import traverse from '@babel/traverse'
+import uniqBy from 'lodash.uniqby'
 import * as types from './types'
 
 class Detective {
@@ -30,6 +31,28 @@ class Detective {
     return this.stats.filter(
       item => item.type === type || item.type.toLowerCase() === type
     ).length
+  }
+
+  apiOnly() {
+    this.stats = this.stats.filter(stat => stat.type === 'API')
+    return this
+  }
+
+  dedupe() {
+    const apiStats = []
+    const stats = this.stats.filter(stat => {
+      if (stat.type === 'API') {
+        apiStats.push(stat)
+        return false
+      }
+      return true
+    })
+    this.stats = [...uniqBy(stats, 'type'), ...uniqBy(apiStats, 'value')]
+    return this
+  }
+
+  hasStats() {
+    return this.stats.length > 0
   }
 }
 

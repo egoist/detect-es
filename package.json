@@ -26,7 +26,8 @@
     "cac": "^4.2.4",
     "chalk": "^2.3.0",
     "fs-extra": "^5.0.0",
-    "globby": "^7.1.1"
+    "globby": "^7.1.1",
+    "lodash.uniqby": "^4.7.0"
   },
   "devDependencies": {
     "babel-jest": "^22.0.4",

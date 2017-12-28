@@ -7,10 +7,15 @@ import { parse } from '.'
 
 const cli = cac()
 
-cli.option('apiOnly', {
-  desc: 'Only show APIs like Promise',
-  type: 'boolean'
-})
+cli
+  .option('apiOnly', {
+    desc: 'Only show APIs like Promise',
+    type: 'boolean'
+  })
+  .option('dedupe', {
+    desc: 'Remove duplicated warnings for the same feature',
+    type: 'boolean'
+  })
 
 cli.command('*', 'Detect from input files', async (input, flags) => {
   if (input.length === 0) {
@@ -23,9 +28,16 @@ cli.command('*', 'Detect from input files', async (input, flags) => {
   }
   const fileStats = await Promise.all(
     files.map(file =>
-      fs
-        .readFile(file, 'utf8')
-        .then(content => ({ stats: parse(content).stats.filter(stat => flags.apiOnly ? stat.type === 'API' : true), file }))
+      fs.readFile(file, 'utf8').then(content => {
+        const detective = parse(content)
+        if (flags.apiOnly) {
+          detective.apiOnly()
+        }
+        if (flags.dedupe) {
+          detective.dedupe()
+        }
+        return { stats: detective.stats, file }
+      })
     )
   )
   for (const fileStat of fileStats) {
