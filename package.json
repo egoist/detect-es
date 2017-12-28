@@ -1,6 +1,6 @@
 {
   "name": "detect-es",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "Detect ES6 features in your code.",
   "repository": {
     "url": "egoist/detect-es",
