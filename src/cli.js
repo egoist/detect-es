@@ -25,10 +25,14 @@ cli.command('*', 'Detect from input files', async (input, flags) => {
     files.map(file =>
       fs
         .readFile(file, 'utf8')
-        .then(content => ({ stats: parse(content).stats, file }))
+        .then(content => ({ stats: parse(content).stats.filter(stat => flags.apiOnly ? stat.type === 'API' : true), file }))
     )
   )
   for (const fileStat of fileStats) {
+    if (fileStat.stats.length > 0) {
+      process.exitCode = 1
+    }
+
     for (const stat of fileStat.stats) {
       const fileLoc = `${fileStat.file}:${stat.loc.start.line}:${
         stat.loc.start.column
@@ -40,7 +44,7 @@ cli.command('*', 'Detect from input files', async (input, flags) => {
           chalk.green(stat.value),
           chalk.dim(fileLoc)
         )
-      } else if (!flags.apiOnly) {
+      } else {
         console.log(chalk.cyan(stat.type), chalk.dim(fileLoc))
       }
     }
