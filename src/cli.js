@@ -17,7 +17,14 @@ cli
     type: 'boolean'
   })
 
-cli.command('*', 'Detect from input files', async (input, flags) => {
+cli.command('*', {
+  desc: 'Detect from input files',
+  examples: [
+    `${chalk.cyan(cli.bin)} "dist/**/*.js"`,
+    `${chalk.cyan(cli.bin)} "src/*.js" --dedupe`,
+    `${chalk.cyan(cli.bin)} "input.js" --apiOnly`
+  ]
+}, async (input, flags) => {
   if (input.length === 0) {
     return cli.showHelp()
   }

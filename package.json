@@ -23,7 +23,7 @@
   "dependencies": {
     "@babel/traverse": "^7.0.0-beta.36",
     "babylon": "^7.0.0-beta.36",
-    "cac": "^4.2.4",
+    "cac": "^4.3.0",
     "chalk": "^2.3.0",
     "fs-extra": "^5.0.0",
     "globby": "^7.1.1",
